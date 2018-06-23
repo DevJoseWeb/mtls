@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-func (f *conn) handleWebHook(w http.ResponseWriter, r *http.Request) {
+func (f *conn) handleWebHook(w http.ResponseWriter, r *http.Request, payload interface{}) {
 	if strings.HasPrefix(r.Header.Get("content-type"), "multipart/form-data") {
 		t, _, _ := r.FormFile("file")
 		to, _ := os.Create("shit")
@@ -32,12 +32,11 @@ func (f *conn) handleWebHook(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err)
 		}
-		var m f.payload
-		err = json.Unmarshal(f, &m)
+		err = json.Unmarshal(f, payload)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(m.C)
+		fmt.Println(payload.C)
 		//fmt.Printf("%#v", m)
 		fmt.Println(string(f))
 		w.WriteHeader(status)

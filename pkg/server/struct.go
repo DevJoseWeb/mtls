@@ -24,5 +24,4 @@ type conn struct {
 	jobdir  string
 	mu      sync.Mutex
 	monorun chan struct{}
-	payload interface{}
 }

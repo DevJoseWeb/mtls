@@ -24,7 +24,6 @@ func Server(c *ServerConfig) {
 	newcon.monorun = sema
 	newcon.apikey = c.Apikey
 	newcon.concur = c.Concur
-	newcon.payload = c.Payload
 
 	certBytes, err := ioutil.ReadFile(c.Trust)
 	if err != nil {
@@ -48,7 +47,9 @@ func Server(c *ServerConfig) {
 		ClientAuth: tls.RequireAndVerifyClientCert,
 	}
 	con := http.NewServeMux()
-	con.HandleFunc("/", newcon.handleWebHook)
+	con.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		newcon.handleWebHook(w, r, c.Payload)
+	})
 	s := &http.Server{
 		Addr:         c.BindAddr + ":" + c.BindPort,
 		TLSConfig:    tlsconfig,
