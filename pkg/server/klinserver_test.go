@@ -5,14 +5,8 @@ import (
 	"testing"
 )
 
-type testPayload struct {
-	C string `json:"content"`
-	D bool   `json:"disabled"`
-}
-
 func TestServer(t *testing.T) {
 	fmt.Println("testing server")
-	var p testPayload
 	s := &ServerConfig{
 		Apikey:   "wtf",
 		Concur:   5,
@@ -21,7 +15,6 @@ func TestServer(t *testing.T) {
 		Key:      "test3.key",
 		Trust:    "devca.crt",
 		Https:    true,
-		Payload:  p,
 	}
 	Server(s)
 }

@@ -48,7 +48,12 @@ func Server(c *ServerConfig) {
 	}
 	con := http.NewServeMux()
 	con.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		newcon.handleWebHook(w, r, c.Payload)
+		var body payload
+		newcon.handleWebHook(w, r, &body)
+	})
+	con.HandleFunc("/foo", func(w http.ResponseWriter, r *http.Request) {
+		var body payloadv2
+		newcon.handleWebHook(w, r, &body)
 	})
 	s := &http.Server{
 		Addr:         c.BindAddr + ":" + c.BindPort,

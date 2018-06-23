@@ -4,6 +4,26 @@ import (
 	"sync"
 )
 
+type payload struct {
+	C string `json:"content"`
+	D bool   `json:"disabled"`
+}
+
+type payloadv2 struct {
+	C string `json:"content"`
+	D bool   `json:"disabled"`
+}
+type Dowork interface {
+	Doit() string
+}
+
+func (m *payload) Doit() string {
+	return m.C
+}
+func (m *payloadv2) Doit() string {
+	return m.C + "noob"
+}
+
 type ServerConfig struct {
 	Apikey   string
 	Concur   int
@@ -13,7 +33,6 @@ type ServerConfig struct {
 	Key      string
 	Trust    string
 	Https    bool
-	Payload  interface{}
 }
 
 type conn struct {
