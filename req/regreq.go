@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new file upload http request with optional extra params
-func SendPayload(i *ReqInfo, payload interface{}) {
+func SendPayload(i *ReqInfo, payload interface{}) { // Send the payload via Json, payload is hte json format.
 	cert, err := tls.LoadX509KeyPair(i.Cert, i.Key)
 	if err != nil {
 		log.Fatalln("Unable to load cert", err)
