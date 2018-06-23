@@ -28,7 +28,7 @@ func TestReq(t *testing.T) {
 	SendPayload(i, payload)
 }
 
-func TestSendfile(t *testing.T) {
+func TestSendFile(t *testing.T) {
 	fmt.Println("testing filesend")
 	i := &ReqInfo{
 		Cert:   "program/test2.klin-pro.com.crt",
@@ -40,5 +40,5 @@ func TestSendfile(t *testing.T) {
 		File:   "program/testfile",
 		Route:  "foo",
 	}
-	Sendfile(i)
+	SendFile(i)
 }
