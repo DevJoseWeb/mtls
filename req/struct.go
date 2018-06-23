@@ -9,5 +9,6 @@ type ReqInfo struct {
 	Dport  string
 	Trust  string
 	Method string
+	Route  string
 	File   string
 }

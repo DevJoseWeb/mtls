@@ -49,7 +49,7 @@ func Sendfile(i *ReqInfo) {
 	extraParams := map[string]string{
 		"filename": "klinFile",
 	}
-	req, err := customRequest("https://"+i.Dest+":"+i.Dport, "file", i.File, i.Method, extraParams)
+	req, err := customRequest("https://"+i.Dest+":"+i.Dport+"/"+i.Route, "file", i.File, i.Method, extraParams)
 	if err != nil {
 		panic(err)
 	}

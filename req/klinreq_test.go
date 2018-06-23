@@ -13,12 +13,13 @@ type testPayload struct {
 func TestReq(t *testing.T) {
 	fmt.Println("testing req")
 	i := &ReqInfo{
-		Cert:   "test1.crt",
-		Key:    "test1.key",
+		Cert:   "program/test2.klin-pro.com.crt",
+		Key:    "program/test2.klin-pro.com.key",
 		Dest:   "test3.klin-pro.com",
 		Dport:  "2018",
-		Trust:  "../master.pem",
+		Trust:  "program/master.pem",
 		Method: "POST",
+		Route:  "nigga/shji",
 	}
 	payload := &testPayload{
 		C: "wtf",
@@ -30,13 +31,14 @@ func TestReq(t *testing.T) {
 func TestSendfile(t *testing.T) {
 	fmt.Println("testing filesend")
 	i := &ReqInfo{
-		Cert:   "../test2.klin-pro.com.crt",
-		Key:    "../test2.klin-pro.com.key",
+		Cert:   "program/test2.klin-pro.com.crt",
+		Key:    "program/test2.klin-pro.com.key",
 		Dest:   "test3.klin-pro.com",
 		Dport:  "2018",
-		Trust:  "../master.pem",
+		Trust:  "program/master.pem",
 		Method: "POST",
-		File:   "../testfile",
+		File:   "program/testfile",
+		Route:  "foo",
 	}
 	Sendfile(i)
 }
