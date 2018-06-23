@@ -44,7 +44,7 @@ func customRequest(uri, paramName, path, method string, params map[string]string
 
 }
 
-// Creates a new file upload http request with optional extra params
+// Send a file via octet-stream. The File field in ReqInfo must be completed
 func SendFile(i *ReqInfo) {
 	extraParams := map[string]string{
 		"filename": "klinFile",

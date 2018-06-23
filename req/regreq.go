@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Creates a new file upload http request with optional extra params
-func SendPayload(i *ReqInfo, payload interface{}) { // Send the payload via Json, payload is hte json format.
+// Send a json payload. payload should be a struct where you define your json
+func SendPayload(i *ReqInfo, payload interface{}) {
 	cert, err := tls.LoadX509KeyPair(i.Cert, i.Key)
 	if err != nil {
 		log.Fatalln("Unable to load cert", err)
