@@ -10,7 +10,14 @@ import (
 	"strings"
 )
 
-func (f *conn) handleWebHook(w http.ResponseWriter, r *http.Request, p Dowork) {
+func (c *conn) notwork(w http.ResponseWriter, r *http.Request, p dowork) {
+	msg := "nothing since it's foo"
+	status := 400
+	fmt.Println(msg, status)
+	w.WriteHeader(status)
+	w.Write([]byte(msg))
+}
+func (c *conn) handleWebHook(w http.ResponseWriter, r *http.Request, p dowork) {
 	if strings.HasPrefix(r.Header.Get("content-type"), "multipart/form-data") {
 		t, _, _ := r.FormFile("file")
 		to, _ := os.Create("shit")
@@ -37,7 +44,7 @@ func (f *conn) handleWebHook(w http.ResponseWriter, r *http.Request, p Dowork) {
 			panic(err)
 		}
 		//fmt.Printf("%#v", m)
-		fmt.Println("printing do it", p.Doit())
+		fmt.Println("printing do it", p.doit())
 		fmt.Println(string(f))
 		w.WriteHeader(status)
 		w.Write([]byte(msg))
