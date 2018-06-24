@@ -6,6 +6,9 @@ import (
 	"testing"
 )
 
+func mainHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("hello world"))
+}
 func TestServer(t *testing.T) {
 	fmt.Println("testing server")
 	c := new(conn)
