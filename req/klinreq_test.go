@@ -19,7 +19,7 @@ func TestReq(t *testing.T) {
 		Dport:  "2018",
 		Trust:  "program/master.pem",
 		Method: "POST",
-		Route:  "nigga/shji",
+		Route:  "shit",
 	}
 	payload := &testPayload{
 		C: "wtf",

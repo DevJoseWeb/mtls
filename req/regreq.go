@@ -41,7 +41,13 @@ func SendPayload(i *ReqInfo, payload interface{}) {
 
 	encodepayload, _ := json.Marshal(payload)
 	ebody := bytes.NewReader(encodepayload)
-	req, err := http.NewRequest(i.Method, "https://"+i.Dest+":"+i.Dport+"/"+i.Route, ebody)
+	var addr string
+	if i.Http {
+		addr = "http://" + i.Dest + ":" + i.Dport + "/" + i.Route
+	} else {
+		addr = "https://" + i.Dest + ":" + i.Dport + "/" + i.Route
+	}
+	req, err := http.NewRequest(i.Method, addr, ebody)
 	if err != nil {
 		log.Println("Unable to speak to our server", err)
 	}

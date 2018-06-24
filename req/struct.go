@@ -11,4 +11,5 @@ type ReqInfo struct {
 	Method string // The req method, POST/PATCH etc...
 	Route  string // The route, by default its "/" it can be "/api"
 	File   string // If you are sending file specify the file you are sending.
+	Http   bool
 }
