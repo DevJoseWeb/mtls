@@ -13,11 +13,11 @@ type testPayload struct {
 func TestReq(t *testing.T) {
 	fmt.Println("testing req")
 	i := &ReqInfo{
-		Cert:   "program/test2.klin-pro.com.crt",
-		Key:    "program/test2.klin-pro.com.key",
-		Dest:   "test3.klin-pro.com",
-		Dport:  "2018",
-		Trust:  "program/master.pem",
+		Cert:  "program/test2.klin-pro.com.crt",
+		Key:   "program/test2.klin-pro.com.key",
+		Dest:  "test3.klin-pro.com",
+		Dport: "2018",
+		//		Trust:  "program/rootca.crt",
 		Method: "POST",
 		Route:  "shit",
 	}
