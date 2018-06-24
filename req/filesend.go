@@ -68,9 +68,9 @@ func SendFile(i *ReqInfo) {
 	clientCertPool.AppendCertsFromPEM(clientCACert)
 
 	tlsConfig := &tls.Config{
-		//	InsecureSkipVerify: false,
-		Certificates: []tls.Certificate{cert},
-		RootCAs:      clientCertPool,
+		InsecureSkipVerify: false,
+		Certificates:       []tls.Certificate{cert},
+		RootCAs:            clientCertPool,
 	}
 	tr := &http.Transport{TLSClientConfig: tlsConfig}
 	client := &http.Client{
