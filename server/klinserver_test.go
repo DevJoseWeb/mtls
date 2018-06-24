@@ -27,9 +27,9 @@ func TestServer(t *testing.T) {
 		Apikey:   "wtf",
 		Concur:   5,
 		BindPort: "2018",
-		Cert:     "test3.crt",
-		Key:      "test3.key",
-		Trust:    "devca.crt",
+		Cert:     "program/test3.klin-pro.com.crt",
+		Key:      "program/test3.klin-pro.com.key",
+		Trust:    "program/intermca.crt",
 		Https:    true,
 		ServeMux: con,
 	}
