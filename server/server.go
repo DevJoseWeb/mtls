@@ -30,7 +30,9 @@ func Server(c *ServerConfig) {
 			tls.X25519,
 		},
 		MinVersion: tls.VersionTLS12,
-		ClientAuth: tls.RequireAndVerifyClientCert,
+	}
+	if c.Verify {
+		tlsconfig.ClientAuth = tls.RequireAndVerifyClientCert
 	}
 	s := &http.Server{
 		Addr:         c.BindAddr + ":" + c.BindPort,

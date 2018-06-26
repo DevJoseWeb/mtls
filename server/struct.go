@@ -13,5 +13,6 @@ type ServerConfig struct {
 	Key      string
 	Trust    string
 	Https    bool
+	Verify   bool
 	ServeMux *http.ServeMux
 }
