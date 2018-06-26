@@ -24,14 +24,12 @@ func TestServer(t *testing.T) {
 		c.handleWebHook(w, r, &body)
 	})
 	s := &ServerConfig{
-		Apikey:   "wtf",
-		Concur:   5,
 		BindPort: "2018",
 		Cert:     "program/test3.klin-pro.com.crt",
 		Key:      "program/test3.klin-pro.com.key",
 		Trust:    "program/mtls.crt",
 		Https:    true,
-		//	Verify:   true,
+		Verify:   true,
 		ServeMux: con,
 	}
 	Server(s)

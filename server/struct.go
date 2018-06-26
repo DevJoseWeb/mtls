@@ -5,8 +5,6 @@ import (
 )
 
 type ServerConfig struct {
-	Apikey   string
-	Concur   int
 	BindAddr string
 	BindPort string
 	Cert     string
