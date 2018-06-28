@@ -13,20 +13,21 @@ type testPayload struct {
 
 func TestReq(t *testing.T) {
 	fmt.Println("testing req")
-	i := &ReqInfo{
-		Cert:   "program/test2.klin-pro.com.crt",
-		Key:    "program/test2.klin-pro.com.key",
-		Dest:   "test3.klin-pro.com",
-		Dport:  "2018",
-		Trust:  "program/rootca.crt",
-		Method: "POST",
-		Route:  "foo",
-	}
 	payload := &testPayload{
 		C: "wtf",
 		D: true,
 	}
-	resp, err := SendPayload(i, payload)
+	i := &ReqInfo{
+		Cert:    "program/test2.klin-pro.com.crt",
+		Key:     "program/test2.klin-pro.com.key",
+		Dest:    "test3.klin-pro.com",
+		Dport:   "2018",
+		Trust:   "program/rootca.crt",
+		Method:  "POST",
+		Route:   "foo",
+		Payload: payload,
+	}
+	resp, err := SendPayload(i)
 	if err != nil {
 		panic(err)
 	}

@@ -13,4 +13,5 @@ type ReqInfo struct {
 	File        string // If you are sending file specify the file you are sending.
 	Http        bool
 	ExtraParams map[string]string
+	Payload     interface{}
 }

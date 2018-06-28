@@ -11,7 +11,7 @@ import (
 )
 
 // Send a json payload. payload should be a struct where you define your json
-func SendPayload(i *ReqInfo, payload interface{}) (*http.Response, error) {
+func SendPayload(i *ReqInfo) (*http.Response, error) {
 	var resp *http.Response
 	cert, err := tls.LoadX509KeyPair(i.Cert, i.Key)
 	if err != nil {
@@ -38,7 +38,7 @@ func SendPayload(i *ReqInfo, payload interface{}) (*http.Response, error) {
 		Transport: tr,
 	}
 
-	encodepayload, _ := json.Marshal(payload)
+	encodepayload, _ := json.Marshal(i.Payload)
 	ebody := bytes.NewReader(encodepayload)
 	var addr string
 	if i.Http {
