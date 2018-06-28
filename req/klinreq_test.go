@@ -2,6 +2,7 @@ package klinreq
 
 import (
 	"fmt"
+	"io/ioutil"
 	"testing"
 )
 
@@ -19,13 +20,22 @@ func TestReq(t *testing.T) {
 		Dport:  "2018",
 		Trust:  "program/rootca.crt",
 		Method: "POST",
-		Route:  "shit",
+		Route:  "foo",
 	}
 	payload := &testPayload{
 		C: "wtf",
 		D: true,
 	}
-	SendPayload(i, payload)
+	resp, err := SendPayload(i, payload)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(body), string(resp.Status))
 }
 
 func TestSendFile(t *testing.T) {
@@ -35,10 +45,19 @@ func TestSendFile(t *testing.T) {
 		Key:    "program/test2.klin-pro.com.key",
 		Dest:   "test3.klin-pro.com",
 		Dport:  "2018",
-		Trust:  "program/rootca.pem",
+		Trust:  "program/rootca.crt",
 		Method: "POST",
 		File:   "program/testfile",
 		Route:  "foo",
+		ExtraParams: map[string]string{
+			"filename": "klinFile",
+		},
 	}
-	SendFile(i)
+	resp := SendFile(i)
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(body), string(resp.Status))
 }

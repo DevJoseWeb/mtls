@@ -6,22 +6,22 @@ import (
 	"crypto/x509"
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"time"
 )
 
 // Send a json payload. payload should be a struct where you define your json
-func SendPayload(i *ReqInfo, payload interface{}) {
+func SendPayload(i *ReqInfo, payload interface{}) (*http.Response, error) {
+	var resp *http.Response
 	cert, err := tls.LoadX509KeyPair(i.Cert, i.Key)
 	if err != nil {
-		log.Fatalln("Unable to load cert", err)
+		return resp, err
 	}
 
 	// Load our CA certificate
 	clientCACert, err := ioutil.ReadFile(i.Trust)
 	if err != nil {
-		log.Fatal("Unable to open cert", err)
+		return resp, err
 	}
 
 	clientCertPool := x509.NewCertPool()
@@ -37,7 +37,6 @@ func SendPayload(i *ReqInfo, payload interface{}) {
 		Timeout:   500 * time.Millisecond,
 		Transport: tr,
 	}
-	//	payload := Payload{C: "asdf", D: true}
 
 	encodepayload, _ := json.Marshal(payload)
 	ebody := bytes.NewReader(encodepayload)
@@ -49,16 +48,11 @@ func SendPayload(i *ReqInfo, payload interface{}) {
 	}
 	req, err := http.NewRequest(i.Method, addr, ebody)
 	if err != nil {
-		log.Println("Unable to speak to our server", err)
+		return resp, err
 	}
-	resp, err := client.Do(req)
+	resp, err = client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		return resp, err
 	}
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Println(string(body), string(resp.Status))
+	return resp, nil
 }

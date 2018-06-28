@@ -45,11 +45,8 @@ func customRequest(uri, paramName, path, method string, params map[string]string
 }
 
 // Send a file via octet-stream. The File field in ReqInfo must be completed
-func SendFile(i *ReqInfo) {
-	extraParams := map[string]string{
-		"filename": "klinFile",
-	}
-	req, err := customRequest("https://"+i.Dest+":"+i.Dport+"/"+i.Route, "file", i.File, i.Method, extraParams)
+func SendFile(i *ReqInfo) *http.Response {
+	req, err := customRequest("https://"+i.Dest+":"+i.Dport+"/"+i.Route, "file", i.File, i.Method, i.ExtraParams)
 	if err != nil {
 		panic(err)
 	}
@@ -81,7 +78,5 @@ func SendFile(i *ReqInfo) {
 	if err != nil {
 		panic(err)
 	}
-	defer resp.Body.Close()
-	body, _ := ioutil.ReadAll(resp.Body)
-	log.Println(string(body), string(resp.Status))
+	return resp
 }
